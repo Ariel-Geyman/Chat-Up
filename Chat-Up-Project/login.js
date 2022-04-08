@@ -5,10 +5,10 @@ function signIn() {
 
     // Creating an HTTP request using JSON
     let xhr = new XMLHttpRequest();
-    let url = "locaclhost::6969?data=" + encodeURIComponent(JSON.stringify({"username": username, "password": password}));
+    let url = "locaclhost::6969/sign-in";
 
-    xhr.open("GET", url, true);
-
+    xhr.open("POST", url, true);
+    
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
@@ -17,8 +17,8 @@ function signIn() {
             console.log(json);
         }
     };
-
-    xhr.send();
+    let data = JSON.stringify({"username": username, "password": password});
+    xhr.send(data);
 }
 
 function signUp() {
@@ -29,7 +29,7 @@ function signUp() {
     
         // Creating an HTTP request using JSON
         let xhr = new XMLHttpRequest();
-        let url = "locaclhost::6969";
+        let url = "locaclhost::6969/sign-up";
     
         xhr.open("POST", url, true);
     
