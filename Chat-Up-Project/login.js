@@ -31,7 +31,7 @@ function signUp() {
     
         // Creating an HTTP request using JSON
         let xhr = new XMLHttpRequest();
-        let url = "http://localhost:6969/sign-up";
+        let url = "http://localhost:6969/add";
     
         xhr.open("POST", url, true);
     
@@ -39,8 +39,9 @@ function signUp() {
     
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                let json = JSON.parse(xhr.responseText);
-                console.log(json);
+                window.location.replace(xhr.responseText);
+            } else {
+                document.write(xhr.responseText);
             }
         };
         let data = JSON.stringify({"username": username, "password": password, "email": email});

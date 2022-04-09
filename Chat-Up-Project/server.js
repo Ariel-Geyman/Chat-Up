@@ -48,6 +48,7 @@ app.get("/sign-up.html", (req, res) => {
     res.sendFile(__dirname + "/sign-up.html");
 });
 
+// http://chat-up/auth
 app.post("/auth", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
@@ -63,7 +64,7 @@ app.post("/auth", (req, res) => {
             
             // If there were any results, then the username and the password are correct
             if(results.length > 0){
-                req.session.cookie.loggedin = true;
+                req.session.cookie.loggedIn = true;
                 req.session.cookie.username = username;
 
                 res.send("/");
@@ -74,6 +75,28 @@ app.post("/auth", (req, res) => {
     }
 });
 
+// http://chat-up/add
+app.post("/add", (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let email = req.body.email;
+
+    // Checking if the username, the password and the Email aren't empty
+    if(username && password && email) {
+        let sql_query = "INSERT INTO accounts (username, password, email) VALUES(?, ?, ?);";
+
+        conn.query(sql_query, [username, password, email], (err) => {
+            if(err) {
+                throw err;
+            }
+            
+            req.session.cookie.loggedIn = true;
+            req.session.cookie.username = username;
+
+            res.send("/");
+        })
+    }
+});
 
 app.listen(6969, () => {
     console.log("Server running on port 6969");
