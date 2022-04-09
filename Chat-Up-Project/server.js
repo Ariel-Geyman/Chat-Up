@@ -1,10 +1,10 @@
-const { Console } = require("console");
 const express = require("express");
 const sessions = require("express-session")
-const fs = require("fs");
 const mysql = require("mysql");
 
 let app = express();
+
+app.use(express.json());
 
 app.use(sessions({
     secret: "chatupsecret",
@@ -34,6 +34,11 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");  // Sending the index.html file
 });
 
+// http://chat-up/login.js
+app.get("/login.js", (req, res) => {
+    res.sendFile(__dirname + "/login.js");
+});
+
 // http://chat-up/sign-in.html
 app.get("/sign-in.html", (req, res) => {
     res.sendFile(__dirname + "/sign-in.html");
@@ -43,13 +48,13 @@ app.get("/sign-up.html", (req, res) => {
     res.sendFile(__dirname + "/sign-up.html");
 });
 
-app.post("/sign-in", (req, res) => {
+app.post("/auth", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
 
     // Checking if the username and password are not empty
     if(username && password) {
-        let sql_query = "SELECT * FROM acounts WHERE username LIKE ? AND password LIKE ?;";
+        let sql_query = "SELECT * FROM accounts WHERE username LIKE ? AND password LIKE ?;";
 
         conn.query(sql_query, [username, password], (err, results) => {
             if(err) {
@@ -61,7 +66,7 @@ app.post("/sign-in", (req, res) => {
                 req.session.cookie.loggedin = true;
                 req.session.cookie.username = username;
 
-                res.sendFile(__dirname + "/#");
+                res.send("/");
             } else {
                 res.status(401).send("Invalid username or password");
             }

@@ -5,16 +5,18 @@ function signIn() {
 
     // Creating an HTTP request using JSON
     let xhr = new XMLHttpRequest();
-    let url = "locaclhost::6969/sign-in";
+    let url = "http://localhost:6969/auth";
 
     xhr.open("POST", url, true);
     
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
+        // Checking if the login was successful
         if (xhr.readyState === 4 && xhr.status === 200) {
-            let json = JSON.parse(xhr.responseText);
-            console.log(json);
+            window.location.replace(xhr.responseText);
+        } else if (xhr.readyState == 4 && xhr.status == 401) {
+            document.write(xhr.responseText);
         }
     };
     let data = JSON.stringify({"username": username, "password": password});
@@ -29,7 +31,7 @@ function signUp() {
     
         // Creating an HTTP request using JSON
         let xhr = new XMLHttpRequest();
-        let url = "locaclhost::6969/sign-up";
+        let url = "http://localhost:6969/sign-up";
     
         xhr.open("POST", url, true);
     
