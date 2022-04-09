@@ -6,6 +6,8 @@ let app = express();
 
 app.use(express.json());
 
+app.use(express.static(__dirname + "/public"));
+
 app.use(sessions({
     secret: "chatupsecret",
     saveUninitialized: true,
@@ -31,8 +33,32 @@ conn.connect((err) => {
 
 // http://chat-up/
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");  // Sending the index.html file
+    res.sendFile(__dirname + "/index.html"); 
 });
+
+app.get("/index.css", (req, res) => {
+    res.sendFile(__dirname + "/index.css");
+});
+
+app.get("/sign-in.css", (req, res) => {
+    res.sendFile(__dirname + "/sign-in.css");
+})
+
+app.get("/sign-up.css", (req, res) => {
+    res.sendFile(__dirname + "/sign-up.css");
+})
+
+app.get("/password-img.png", (req, res) => {
+    res.sendFile(__dirname + "/password-img.png");
+})
+
+app.get("/user-img.png", (req, res) => {
+    res.sendFile(__dirname + "/user-img.png");
+})
+
+app.get("/email-img.png", (req, res) => {
+    res.sendFile(__dirname + "/email-img.png");
+})
 
 // http://chat-up/login.js
 app.get("/login.js", (req, res) => {
