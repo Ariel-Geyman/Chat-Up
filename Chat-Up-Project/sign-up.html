@@ -3,18 +3,34 @@
 <html>
     <head>
         <title>Sign In</title>
-        <script src="login.js"></script>
+        <script src="/login.js"></script>
+        <link rel="stylesheet" type="text/css" href="sign-up.css">
     </head>
     <body>
-        <label for="username_input">Username:<br></label>
-        <input type="text" name="username_input" id="username"><br><br>
+        <div class="title">
+            Sign up
+        </div>
 
-        <label for="password_input">Password:<br></label>
-        <input type="password" name="password_input" id="password"><br><br>
+        <div class="sign-up">
+            <label for="username_input">Username:<br></label>
+            <div class="user-wrapper">
+                <img src="user-img.png" alt="user-img" id="user-img">
+                <input type="text" name="username_input" id="username"><br><br>
+            </div>  
+            
+            <label for="password_input">Password:<br></label>
+            <div class="password-wrapper">
+                <img src="password-img.png" alt="password-img" id="password-img">
+                <input type="password" name="password_input" id="password"><br><br>
+            </div>
 
-        <label for="email_input">Email:<br></label>
-        <input type="text" name="email_input" id="email"><br><br>
+            <label for="email_input">Email:<br></label>
+            <div class="email-wrapper">
+                <img src="email-img.png" alt="email-img" id="email-img">
+                <input type="email" name="email_input" id="email"><br><br>
+            </div>
 
-        <button type="submit" onclick="signUp()">Sign Up</button>
+            <button type="submit" onclick="signUp()" id="sign-up-button">Login</button>
+        </div>
     </body>
 </html>

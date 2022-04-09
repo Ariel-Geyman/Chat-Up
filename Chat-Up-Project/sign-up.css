@@ -1,0 +1,87 @@
+body {
+    background-color: rgb(39, 39, 39);
+}
+
+.title {
+    margin: auto;
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    font-size: 50px;
+    background-color: rgb(24, 136, 24);
+}
+
+.sign-up {
+    margin: auto;
+    text-align: center;
+    font-size: 60px;
+    margin-top: 100px;
+    border: 10px solid white;
+    width: 300px;
+    height: 550px;
+    border-radius: 10px;
+    color: white;
+}
+
+#sign-up-button {
+    background-color: rgb(86, 160, 86);
+    color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.user-wrapper {
+    margin: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    height: 60px;
+}
+
+.password-wrapper {
+    margin: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    height: 60px;
+}
+
+.email-wrapper {
+    margin: auto;
+    margin-left: 40px;
+    margin-top: 20px;
+    height: 60px;
+}
+
+#user-img {
+    float: left;
+    width: 25px;
+    height: 25px;
+}
+
+#password-img {
+    float: left;
+    width: 25px;
+    height: 25px;
+}
+
+#email-img {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    float: left;
+}
+
+#username {
+    height: 20px;
+    float: left;
+}
+
+#password {
+    height: 20px;
+    float: left;
+}
+
+#email {
+    height: 20px;
+    float: left;
+}
