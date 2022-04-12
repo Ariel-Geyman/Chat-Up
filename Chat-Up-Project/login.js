@@ -14,6 +14,7 @@ function signIn() {
     xhr.onreadystatechange = function () {
         // Checking if the login was successful
         if (xhr.readyState === 4 && xhr.status === 200) {
+            sessionStorage.setItem("username", username);
             window.location.replace(xhr.responseText);
         } else if (xhr.readyState == 4 && xhr.status == 401) {
             alert(xhr.responseText);
@@ -39,6 +40,7 @@ function signUp() {
     
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
+                sessionStorage.setItem("username", username);
                 window.location.replace(xhr.responseText);
             } else {
                 alert(xhr.responseText);

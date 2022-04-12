@@ -1,18 +1,15 @@
 const express = require("express");
-const sessions = require("express-session")
 const mysql = require("mysql");
+const socketIo = require("socket.io");
+const http = require("http");
 
 let app = express();
+let server = http.createServer(app);
+let io = socketIo(server);
 
 app.use(express.json());
 
 app.use(express.static(__dirname + "/public"));
-
-app.use(sessions({
-    secret: "chatupsecret",
-    saveUninitialized: true,
-    resave: true
-}));
 
 // Connecting to the MySQL server
 const conn = mysql.createConnection({
@@ -74,6 +71,18 @@ app.get("/sign-up.html", (req, res) => {
     res.sendFile(__dirname + "/sign-up.html");
 });
 
+app.get("/chat.html", (req, res) => {
+    res.sendFile(__dirname + "/chat.html");
+});
+
+app.get("/chat.css", (req, res) => {
+    res.sendFile(__dirname + "/chat.css");
+});
+
+app.get("/chat.js", (req, res) => {
+    res.sendFile(__dirname + "/chat.js");
+});
+
 // http://chat-up/auth
 app.post("/auth", (req, res) => {
     let username = req.body.username;
@@ -90,10 +99,7 @@ app.post("/auth", (req, res) => {
             
             // If there were any results, then the username and the password are correct
             if(results.length > 0){
-                req.session.cookie.loggedIn = true;
-                req.session.cookie.username = username;
-
-                res.send("/");
+                res.send("/chat.html");
             } else {
                 res.status(401).send("Invalid username or password");
             }
@@ -116,14 +122,20 @@ app.post("/add", (req, res) => {
                 throw err;
             }
             
-            req.session.cookie.loggedIn = true;
-            req.session.cookie.username = username;
-
-            res.send("/");
+            res.send("/chat.html");
         })
     }
 });
 
-app.listen(6969, () => {
+io.on("connection", (socket) => {
+    console.log("Socket connected");
+
+    socket.on("message", (data)=> {
+        console.log("data:" + data + "broadcasted");
+        socket.broadcast.emit("message", data);
+    });
+});
+
+server.listen(6969, () => {
     console.log("Server running on port 6969");
 });
