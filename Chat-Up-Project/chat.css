@@ -13,6 +13,7 @@ body {
     color: black;
     background-color: white;
     overflow: scroll;
+    font-size: 22px;
 }
 
 .chat-input {
@@ -21,7 +22,29 @@ body {
     font-size: 30px;
 }
 
+.chat-input-wrapper {
+    margin: auto;
+    margin-left: 600px;
+}
+
 #msg {
-    width: 400px;
-    height: 60px;
+    float: left;
+    width: 350px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+#send-msg-btn {
+    float: left;
+    height: 35px;
+    background-color: rgb(86, 160, 86);
+    color: white;
+    border: none;
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+#msg-label {
+    float: left;
 }
